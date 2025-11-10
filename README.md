@@ -21,3 +21,17 @@ ros2 launch ntu_robotsim maze.launch.py
 source install/setup.bash
 ros2 launch ntu_robotsim single_robot_sim.launch.py
 ```
+
+### Then in a Different Terminal, Launch Single Robot Simulation
+```bash
+source install/setup.bash
+ros2 launch odom_to_tf_ros2 odom_to_tf.launch.py
+```
+
+### Then in a Different Terminal, Launch Single Robot Simulation
+```bash
+source install/setup.bash
+ros2 launch octomap_server2 octomap_server_launch.py 
+```
+
+### Now you can visualise the OctoMap in Rviz2
