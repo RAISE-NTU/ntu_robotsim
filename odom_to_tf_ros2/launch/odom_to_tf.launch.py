@@ -28,8 +28,8 @@ def generate_launch_description():
             arguments=[
                 '0', '0', '0',  # Translation: x y z
                 '0', '0', '0', '1',  # Rotation: qx qy qz qw
-                'atlas/base_link',  # Parent frame
-                'atlas/realsense'  # Child frame
+                'base_link',  # Parent frame
+                'realsense'  # Child frame
             ],
             parameters=[
                 {'use_sim_time': True},
