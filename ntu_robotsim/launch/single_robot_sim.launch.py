@@ -49,17 +49,17 @@ def namespace_ros_gz_config(ros_gz_config, model_namespace):
 
 
 def generate_launch_description():
-    ntu_hmrs_sim_share_dir = get_package_share_directory('ntu_hmrs_sim')
+    ntu_robotsim_share_dir = get_package_share_directory('ntu_robotsim')
 
     # Simple hack to get the world argument from the command line, see https://answers.ros.org/question/376816/how-to-pass-launch-args-dynamically-during-launch-time/
-    print(f'Set the world (default marsyard2020), e.g. ros2 launch ntu_hmrs_sim single_robot_sim.launch.py world:=maze')
+    print(f'Set the world (default marsyard2020), e.g. ros2 launch ntu_robotsim single_robot_sim.launch.py world:=maze')
     print(f'Available worlds: maze, marsyard2020')
     world = 'maze'
     for arg in sys.argv:
         if arg.startswith('world:='):
             world = arg.split(':=')[1]
 
-    sim_config_path = os.path.join(ntu_hmrs_sim_share_dir, 'config', 'single_robot_' + world + '_sim.yaml')
+    sim_config_path = os.path.join(ntu_robotsim_share_dir, 'config', 'single_robot_' + world + '_sim.yaml')
     with open(sim_config_path, 'r') as f:
         sim_config = yaml.safe_load(f)
         print(yaml.dump(sim_config, sort_keys=False, default_flow_style=False))
@@ -70,7 +70,7 @@ def generate_launch_description():
 
     # Spawn the two robots
     spawn_robot_python_source = PythonLaunchDescriptionSource(
-        os.path.join(ntu_hmrs_sim_share_dir, 'launch', 'spawn_robot.launch.py')
+        os.path.join(ntu_robotsim_share_dir, 'launch', 'spawn_robot.launch.py')
     )
     # transform all booleans to string, IncldueLaunchDescription does not support booleans
     booleans_to_strings_in_dict(spawn_robot_params)
@@ -80,7 +80,7 @@ def generate_launch_description():
     )
 
     # Start the parameter bridge for communication between ROS2 and Ignition Gazebo
-    ros_gz_config = os.path.join(ntu_hmrs_sim_share_dir, 'config', 'single_robot_ros_gz_bridge.yaml')
+    ros_gz_config = os.path.join(ntu_robotsim_share_dir, 'config', 'single_robot_ros_gz_bridge.yaml')
     if model_namespace != '':
         ros_gz_config = namespace_ros_gz_config(ros_gz_config, model_namespace)
     ros_gz_bridge = ExecuteProcess(cmd=['ros2', 'run', 'ros_gz_bridge', 'parameter_bridge',

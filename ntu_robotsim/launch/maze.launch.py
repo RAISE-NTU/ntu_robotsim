@@ -7,10 +7,10 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
 def generate_launch_description():
-    ntu_hmrs_sim_share_dir = get_package_share_directory('ntu_hmrs_sim')
+    ntu_robotsim_share_dir = get_package_share_directory('ntu_robotsim')
     ros_gz_sim_share_dir = get_package_share_directory('ros_gz_sim')
 
-    gz_args = os.path.join(ntu_hmrs_sim_share_dir, 'worlds', 'maze', 'maze.sdf')
+    gz_args = os.path.join(ntu_robotsim_share_dir, 'worlds', 'maze', 'maze.sdf')
     gz_args += " -v 4"
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(

@@ -96,8 +96,8 @@ def namespace_sdf_file(sdf_path, params):
 
 def launch_setup(context):
     print('launching robot')
-    ntu_hmrs_sim_share_dir = get_package_share_directory('ntu_hmrs_sim')
-    config_file = os.path.join(ntu_hmrs_sim_share_dir, 'config', 'spawn_robot.yaml')
+    ntu_robotsim_share_dir = get_package_share_directory('ntu_robotsim')
+    config_file = os.path.join(ntu_robotsim_share_dir, 'config', 'spawn_robot.yaml')
     with open(config_file, 'r') as f:
         params = yaml.safe_load(f)['spawn_robot']['ros__parameters']
     params = overwrite_yaml_params_from_cli(params, context.launch_configurations)
@@ -106,7 +106,7 @@ def launch_setup(context):
     params['robot_name'] = robot_name
     print(yaml.dump(params, sort_keys=False, default_flow_style=False))
 
-    sdf_path = os.path.join(ntu_hmrs_sim_share_dir, 'models', params['sdf_file'])
+    sdf_path = os.path.join(ntu_robotsim_share_dir, 'models', params['sdf_file'])
     sdf_path_final = copy.deepcopy(sdf_path)
     if robot_name != '':
         # We overwrite the final sdf file to namespace all relevant topics
