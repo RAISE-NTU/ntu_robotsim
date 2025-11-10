@@ -22,13 +22,13 @@ source install/setup.bash
 ros2 launch ntu_robotsim single_robot_sim.launch.py
 ```
 
-### Then in a Different Terminal, Launch Single Robot Simulation
+### Then in a Different Terminal, Launch Ground Truth Odometry and Required Robot TFs
 ```bash
 source install/setup.bash
 ros2 launch odom_to_tf_ros2 odom_to_tf.launch.py
 ```
 
-### Then in a Different Terminal, Launch Single Robot Simulation
+### Then in a Different Terminal, Launch OctoMap
 ```bash
 source install/setup.bash
 ros2 launch octomap_server2 octomap_server_launch.py 
